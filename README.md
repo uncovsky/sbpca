@@ -1,4 +1,7 @@
 #	Code repository for multi objective VI / BRTDP.
+
+This code is part of my bachelor thesis available at https://is.muni.cz/th/as4mz/.
+
 ## Dependencies: c++17, cmake 3.12, Eigen 3.3 (sparse matrices), gnuplot (visualization)
 
 ## Installing the dependencies on Debian/Ubuntu can be done by running:
