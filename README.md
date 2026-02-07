@@ -1,6 +1,14 @@
 #	Simulation-based Pareto Curve Approximation
+This repository implements a multi-objective extension of the BRTDP algorithm introduced by [McMahan et al.](https://www.cs.cmu.edu/~ggordon/mcmahan-likhachev-gordon.brtdp.pdf). The algorithm can solve multi-objective discounted-reward queries on general MDPs and reachability queries on SSPs (up to two objectives at once), relying on two components:
 
-This code is part of my bachelor's thesis available at https://is.muni.cz/th/as4mz/.
+1. Convex Hull Value Iteration Updates, which iteratively refine lower and upper bounds on state-action Pareto curves
+2. Partial exploration of the MDP via BRTDP-inspired heuristics, which prioritize less explored states, while retaining formal guarantees
+
+
+This results in a simple yet powerful model checker that can solve certain benchmarks much more efficiently than standard methods, outperforming the state-of-the-art probabilistic model checker Prism on three of the four benchmarks considered. The table below lists the sizes of the state spaces of the MDPs, the true underlying Pareto front, and the verification time (in seconds) across 10 runs of PRISM and SBPCA. In each case, the result is an epsilon-approximation of the Pareto front, where eps = 0.01.
+![results](evaluation_results.png)
+
+The accompanying text introducing the algorithm and a summary of the results can be found in Chapters 4 & 5 of my bachelor's thesis, available at https://is.muni.cz/th/as4mz/.
 
 ## Dependencies: c++17, cmake 3.12, Eigen 3.3 (sparse matrices), gnuplot (visualization)
 
@@ -20,14 +28,14 @@ After building, the final binary is located at build/mo-brtdp.
 The binary runs all the benchmarks 5 times for SCHVI, SBPCA-DB and SBPCA-PA,
 outputting the results and statistics in out/.
 
-The code used for evaluation is located in include/evaluation.hpp.
+The evaluation code is located in include/evaluation.hpp.
 
 ## Parser
 
 The file format is described in depth here: [PRISM Format Description](https://www.prismmodelchecker.org/manual/Appendices/ExplicitModelFiles)
 , see Transition ( .tra ) files and Transition Reward ( .trew ) files. 
 
-It is also possible to supply more than one dimension of rewards in one file for any transition.
+It is also possible to specify multiple reward dimensions in a single file for any transition.
 
 * Original PRISM format:
 	+ 1 0 2 6 - transition from 1 under action 0 to state 2 has reward 6
