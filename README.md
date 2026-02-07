@@ -1,13 +1,13 @@
-#	Code repository for multi objective VI / BRTDP.
+#	Simulation-based Pareto Curve Approximation
 
-This code is part of my bachelor thesis available at https://is.muni.cz/th/as4mz/.
+This code is part of my bachelor's thesis available at https://is.muni.cz/th/as4mz/.
 
 ## Dependencies: c++17, cmake 3.12, Eigen 3.3 (sparse matrices), gnuplot (visualization)
 
 ## Installing the dependencies on Debian/Ubuntu can be done by running:
 	 $ sudo apt-get install libeigen3-dev gnuplot cmake
 
-## Afterwards simply run:
+## Afterwards, simply run:
 	 $ mkdir build
 	 $ cd build
 	 $ cmake ..
@@ -38,21 +38,21 @@ It is also possible to supply more than one dimension of rewards in one file for
 More details on the parser ( all the things that are checked, etc. ) are given
 in the source file src/parser.cpp
 
-## Using the tool
+## Importing PRISM files
 
 No CLI for now, but running the solvers on an MDP of your choice can be done as
 follows.
 
-note that PRISM needs to be installed, see [github](https://github.com/prismmodelchecker/prism).
+Note that PRISM needs to be installed, see [github](https://github.com/prismmodelchecker/prism).
 
 
-* Export the explicit transition files, this can be done using PRISM by
+* Export the explicit transition files; this can be done using PRISM by
 running the following in the root directory of PRISM
 
     $ prism/bin/prism MODEL_PATH --exporttrans out.tra --exporttransrewards out.trew
 
 
-* Locate the ID of the starting state, this can be done by 
+* Locate the ID of the starting state. This can be done by 
     $ prism/bin/prism MODEL_PATH --exportlabels labels.txt
 		 , and looking at the index associated with the label "init", which is usually 0
 
